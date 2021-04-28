@@ -61,7 +61,7 @@ if __name__ == '__main__':
         bar.text('Processing the project status for each dataset...')
         bar()
         for dataset in args.datasets:
-            outpath = f"{args.output_dir}{os.sep}{args.dataset}"
+            outpath = f"{args.output_dir}{os.sep}{dataset}"
             project_stat = ProjectStatus(args.project_dir, dataset)
 
             df = df.append(project_stat.get_summary())
@@ -73,12 +73,12 @@ if __name__ == '__main__':
 
     df_simple = df[["Name", "Period", "Builds", "Faults", "Tests", "Duration", "Interval"]]
 
-    print(f"\n\nExporting Project Status to project_status.txt")
-    with open('project_status.txt', 'w') as tf:
+    print(f"\n\nExporting Project Status to {args.output_dir}{os.sep}project_status.txt")
+    with open(f'{args.output_dir}{os.sep}project_status.txt', 'w') as tf:
         tf.write(tabulate(df_simple, headers='keys', tablefmt='psql', showindex=False))
 
-    print(f"Exporting Project Status to project_status_table.tex")
-    df_simple.to_latex('project_status_table.tex', index=False)
+    print(f"Exporting Project Status to {args.output_dir}{os.sep}project_status_table.tex")
+    df_simple.to_latex(f'{args.output_dir}{os.sep}project_status_table.tex', index=False)
 
     latex = df.to_latex(index=False)
 
@@ -91,16 +91,17 @@ if __name__ == '__main__':
     caption = f"System Information"
 
     # Insert new LaTeX commands
-    latex_list.insert(0, '\\begin{table*}[!ht]')
-    latex_list.insert(1, f'\\caption{{{caption}}}')
-    latex_list.insert(2, '\\resizebox{\\linewidth}{!}{')
-    latex_list.append('}')
-    latex_list.append('\\end{table*}')
+    latex_list.insert(0, '\\begin{table}[!ht]')
+    latex_list.insert(1, '\\addtolength{\\tabcolsep}{-4pt}')
+    # latex_list.insert(1, f'\\caption{{{caption}}}')
+    # latex_list.insert(2, '\\resizebox{\\linewidth}{!}{')
+    # latex_list.append('}')
+    latex_list.append('\\end{table}')
 
     # join split lines to get the modified latex output string
     latex_new = '\n'.join(latex_list)
 
     # Save in a file
-    print(f"Exporting Project Status to project_status_table_complete.tex")
-    with open('project_status_table_complete.tex', 'w') as tf:
+    print(f"Exporting Project Status to {args.output_dir}{os.sep}project_status_table_complete.tex")
+    with open(f'{args.output_dir}{os.sep}project_status_table_complete.tex', 'w') as tf:
         tf.write(latex_new)
