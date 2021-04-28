@@ -7,7 +7,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from utils.pandas_utils import split_dataframe_rows
+from tcpci_dataset_utils.utils.pandas_utils import split_dataframe_rows
 
 
 class DataFiltering(object):
