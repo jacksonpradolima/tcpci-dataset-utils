@@ -24,7 +24,7 @@ For instance, we used the datasets in our prioritization algorithm named **COLEM
 	- [Extracting the main information](#extracting-the-main-information)
     - [Showing the information about the systems](#showing-the-information-about-the-systems)
 - [References](#references)
-- [contributors](#Contributors)
+- [Contributors](#contributors)
 ----------------------------------
 
 
