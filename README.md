@@ -92,7 +92,7 @@ For this kind of situation, when we process the IOF/ROL dataset we do not use th
 ## Extracting the main information 
 
 ```
-python data_filtering_main.py --repository "X"
+python data_filtering_main.py --repository "data/deeplearning4j@deeplearning4j"
 ```
 
 **where:** 
