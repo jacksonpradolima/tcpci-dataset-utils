@@ -109,6 +109,34 @@ python project_status_main.py --project_dir 'data' --datasets 'deeplearning4j@de
 - `--datasets` is an array that represents the datasets to analyse. It's the folder name inside `--project_dir` which contains the required file inputs.
 - `--output_dir` is the directory where we gonna save the results.
 
+As result, three files will be saved in `--output_dir`:
+
+- **project_status.txt**: contains a summary about the datasets analyzed. This format is generate to be read easily by humans.
+- **project_status_table.tex**: contains a summary about the datasets analyzed **without some columns** that contains graphs. This format is generate to be used in LaTeX.
+- **project_status_table_complete.tex**: contains a summary about the datasets analyzed and columns that contains graphs. This format is generate to be used in LaTeX.
+
+The output from **project_status.txt** is similar to:
+
+```
++----------------+-----------------------+-------------+-------------+----------------+------------------+------------------+
+| Name           | Period                | Builds      | Faults      | Tests          | Duration         | Interval         |
+|----------------+-----------------------+-------------+-------------+----------------+------------------+------------------|
+| Deeplearning4J | 2014/02/22-2016/01/01 | 3410 (483)  | 777 (323)   | 117 (1 - 52)   | 12.32 (14.91)    | 306.05 (442.49)  |
+| Iofrol         | 2015/02/13-2016/10/25 | 2392 (2392) | 9289 (1627) | 1941 (1 - 707) | 1537.27 (2018.7) | 1324.36 (291.65) |
++----------------+-----------------------+-------------+-------------+----------------+------------------+------------------+
+```
+
+and the following image contains an example from **project_status_table_complete.tex** file:
+
+![plot](resources/datasets.png)
+
+Besides that, inside `--output_dir` will be save for each dataset (organized in folders) three files: 
+
+- **failures_by_cycles.pdf**: contains a line plot about the failures by CI cycles.
+- **testcase_volatility.pdf**: contains a line plot about the number of tests by CI cycles. The tests can be add or removed (discontinued) during software lifecycle. In this way, this plot show the variation of tests (test case volatility) along with the CI Cycles.
+- **heatmap.pdf**: contains a heatmap plot about the test case volatility along with the CI Cycles. This plot allows to observe if a test case `returns` between CI Cycles.
+
+
 # References
 
 - 📖 [**Ref1**] [A Multi-Armed Bandit Approach for Test Case Prioritization in Continuous Integration Environments](https://doi.org/10.1109/TSE.2020.2992428) published at **IEEE Transactions on Software Engineering (TSE)**
