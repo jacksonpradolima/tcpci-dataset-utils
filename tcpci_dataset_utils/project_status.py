@@ -122,7 +122,9 @@ class ProjectStatus(object):
         sparklines_faults = get_sparline(faults[['BuildId', faults_col]]) if total_faults > 0 else ""
         sparklines_volatility = get_sparline(tests[['BuildId', 'Name']])
 
-        row = [self.project.split("@")[-1].title(), mindate + "-" + maxdate,
+        dataset = self.project.split("@")[-1] if "@" in self.project else self.project
+
+        row = [dataset.title(), mindate + "-" + maxdate,
                f"{total_builds} ({builds})",
                f"{total_faults} ({faulty_builds})",
                sparklines_faults,
